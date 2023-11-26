@@ -1,0 +1,4 @@
+#root {
+    display: grid;
+    grid-template-rows: 3rem 1fr 3rem;
+}

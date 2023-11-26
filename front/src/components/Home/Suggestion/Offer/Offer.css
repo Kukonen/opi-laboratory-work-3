@@ -1,0 +1,18 @@
+.home__suggestion__offer {
+    display: flex; 
+    
+    img {
+        width: 10rem;
+        heigth: 10rem;
+
+        padding: 0.5rem;
+    }
+
+    div {
+        padding: 0.5rem;
+    }
+}
+
+.home__suggestion__offer__description {
+
+}

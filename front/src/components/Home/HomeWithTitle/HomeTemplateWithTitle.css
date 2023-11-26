@@ -1,0 +1,38 @@
+.home-with-title {
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+}
+
+.home-with-title__headline {
+    font-size: 1.65rem;
+}
+
+.home-with-title__section {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.home-with-title__section__content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5rem;
+
+    margin: auto;
+    padding: 1rem 0;
+
+    input {
+        font-size: 1.25rem;
+    }
+
+    select {
+        font-size: 1.25rem;
+    }
+
+    button {
+        font-size: 1.25rem;
+    }
+}

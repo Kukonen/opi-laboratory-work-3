@@ -1,0 +1,7 @@
+.home__history__story_plus {
+    border-color: var(--sussess-color) !important;
+}
+
+.home__history__story_minus {
+    border: 1px solid var(--error-color) !important;
+}

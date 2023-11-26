@@ -1,0 +1,27 @@
+#home {
+    display: flex;
+
+    gap: 3rem;
+
+    /* grid-template-rows: auto 1fr;
+    grid-template-columns: 13rem 1fr;
+
+    grid-template-areas: 
+    "profile content"
+    "navigation content"; */
+
+    height: 100%;
+    width: 100%;
+}
+
+#home__left-section {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.5rem;
+}
+
+#home__right-section {
+    width: 100%;
+}

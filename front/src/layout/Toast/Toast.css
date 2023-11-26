@@ -1,0 +1,23 @@
+#toast {
+    position: fixed;
+
+    bottom: 2rem;
+    right: 5rem;
+
+    padding: 0.5rem 2rem;
+
+    background-color: var(--background-color-secondary);
+
+    border: 1px solid var(--border-color);
+
+    cursor: pointer;
+}
+
+.toast_success {
+    background-color: var(--sussess-color) !important;
+}
+
+.toast_error {
+    background-color: var(--error-color) !important;
+    color: var(--background-color-primary) !important;
+}
