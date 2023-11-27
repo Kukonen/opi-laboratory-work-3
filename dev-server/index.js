@@ -158,7 +158,25 @@ app.post('/api/auth/login', (req, res, next) => {
     })
 })
 
+// aaaAAA111 - error
 app.post('/api/auth/password', (req, res, next) => {
+    console.log(req.body.password)
+    if (JSON.stringify(req.body.password) === JSON.stringify({
+        words: [
+          2016570464,
+          1314344349,
+          400082566,
+          -534660916,
+          -185331076,
+          -1903105723,
+          -301794024,
+          2134117302
+        ],
+        sigBytes: 32
+      })) {
+        res.statusCode = 400;
+        res.send("Password is invalid")
+    }
     res.json({
         access: "access1",
         refresh: "refresh1"

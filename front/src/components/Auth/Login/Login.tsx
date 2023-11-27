@@ -1,14 +1,49 @@
 import AuthService from '@/services/auth.service';
+import { setToastMessage } from '@/store/reducers/toast';
+import Validator from '@/utils/Validator';
 import {useState} from 'react'
+import { useDispatch } from 'react-redux';
 
 export default () => {
+    const dispatch = useDispatch();
     const [login, setLogin] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const requstToService = () => {
-        if (login && password) {
-            AuthService.login(login, password);
+        if (!(login && password)) {
+            return;
         }
+
+        if (!Validator.login(login)) {
+            dispatch(setToastMessage({
+                active: true,
+                message: 'Некорректный логин',
+                type: 'ERROR'
+            }))
+            return;
+        }
+
+        if (!Validator.password(password)) {
+            dispatch(setToastMessage({
+                active: true,
+                message: 'Некорректный пароль',
+                type: 'ERROR'
+            }))
+            return;
+        }
+
+        AuthService.login(login, password)
+            .then()
+            .catch(error => {
+                if (error.status === 400) {
+                    dispatch(setToastMessage({
+                        active: true,
+                        message: 'Попробуйте ввести данные заново',
+                        type: 'ERROR'
+                    }))
+                    return;
+                }
+            })
     }
 
     return (

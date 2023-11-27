@@ -16,32 +16,43 @@ class AuthService {
     // }
 
     static async login(login: string, password: string) {
-        server('auth/login', 'POST', undefined, {
-            "login": login
-        }).then(response => {
-            // @ts-ignore
-            const { databaseSalt, onceSalt } = response;
-
-            if (!(databaseSalt && onceSalt)) {
-                return;
-            }
-
-            server('auth/password', 'POST', undefined, {
-                "password": sha256(sha256(password + databaseSalt) + onceSalt)
-            }).then((response) => {
+        return new Promise((resolve, reject) => {
+            server('auth/login', 'POST', undefined, {
+                "login": login
+            }).then(response => {
                 // @ts-ignore
-                const { access, refresh} = response;
-
-                if (!(access && refresh)) {
+                const { databaseSalt, onceSalt } = response;
+    
+                if (!(databaseSalt && onceSalt)) {
                     return;
                 }
     
-                localStorage.setItem("access", access);
-                localStorage.setItem("refresh", refresh);
+                server('auth/password', 'POST', undefined, {
+                    "password": sha256(sha256(password + databaseSalt) + onceSalt)
+                }).then((response) => {
+                    // @ts-ignore
+                    const { access, refresh} = response;
+    
+                    if (!(access && refresh)) {
+                        return;
+                    }
+        
+                    localStorage.setItem("access", access);
+                    localStorage.setItem("refresh", refresh);
+    
+                    window.location.replace("/");
+                }).then(() => {
+                    resolve("ok")
+                }).catch( 
+                    error => 
+                    reject(error)
+                )
 
-                window.location.replace("/");
+                
+            }).catch((error) => {
+                reject(error)
             })
-        })
+        });
     }
 
     static async register(name: string, surname: string, telephone: string, email: string, password: string) {
